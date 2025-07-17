@@ -1,13 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
+import Dashboard from './src/pages/Dashboard';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello World! Sejam bem vindos ao IrrigaFacil!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <Dashboard />;
 }
 
 const styles = StyleSheet.create({
