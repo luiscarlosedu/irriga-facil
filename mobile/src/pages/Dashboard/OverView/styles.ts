@@ -8,11 +8,18 @@ export const Section = styled.View`
     margin-bottom: 24px;
 `;
 
+export const TitleContainer = styled.View`
+    display: flex;
+    flex-direction: row;
+`;
+
 export const SectionTitle = styled.Text`
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-left: 4px;
     color: #333;
+    width: 100%;
 `;
 
 export const Row = styled.View`
@@ -97,6 +104,9 @@ export const Button = styled.TouchableOpacity`
     margin-right: 10px;
     width: 100%;
     text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
 `;
 
 export const ButtonText = styled.Text`

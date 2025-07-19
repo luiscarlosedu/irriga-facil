@@ -1,5 +1,5 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { ButtonRow, Container, Value } from "./styles";
+import { Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons, Octicons } from "@expo/vector-icons";
+import { ButtonRow, Container, TitleContainer, Value } from "./styles";
 import { Button, ButtonText, ImagePlant, Label, MoistureCard, MoistureIcon, MoistureInfo, MoistureStatus, MoistureValue, Row, Section, SectionTitle } from "./styles";
 
 const calcularUmidade = (valor: number): number => {
@@ -40,7 +40,10 @@ export default function OverView() {
 
             {/* 💧 Umidade do Solo */}
             <Section>
-                <SectionTitle>💧 Umidade do Solo</SectionTitle>
+                <TitleContainer>
+                    <Ionicons name="water" size={23} color={"#48C5F3"} />
+                    <SectionTitle>Umidade do Solo</SectionTitle>
+                </TitleContainer>
                 <MoistureCard status={status}>
 
                     <MoistureInfo>
@@ -50,15 +53,15 @@ export default function OverView() {
 
                     <MoistureIcon>
                         <MaterialCommunityIcons
-                        name="water-percent"
-                        size={32}
-                        color={
-                            status === "Alta"
-                            ? "#673AB7" // roxo úmido
-                            : status === "Moderada"
-                            ? "#4CAF50"
-                            : "#FF5722"
-                        }
+                            name="water-percent"
+                            size={32}
+                            color={
+                                status === "Alta"
+                                ? "#673AB7" // roxo úmido
+                                : status === "Moderada"
+                                ? "#4CAF50"
+                                : "#FF5722"
+                            }
                         />
                     </MoistureIcon>
 
@@ -67,19 +70,28 @@ export default function OverView() {
 
             {/* ⚙️ Bomba */}
             <Section>
-                <SectionTitle>⚙️ Bomba</SectionTitle>
+                <TitleContainer>
+                    <FontAwesome6 name="gear" size={23} color={"#81ACBB"} />
+                    <SectionTitle>Bomba</SectionTitle>
+                </TitleContainer>
                 <Label>Status: {bombaLigada ? "Ligada" : "Desligada"}</Label>
             </Section>
 
             {/* 🕒 Última Irrigação */}
             <Section>
-                <SectionTitle>🕒 Última Irrigação</SectionTitle>
+                <TitleContainer>
+                    <Feather name="clock" size={23} />
+                    <SectionTitle>Última Irrigação</SectionTitle>
+                </TitleContainer>
                 <Label>{ultimaIrrigacao}</Label>
             </Section>
 
             {/* 📈 Histórico */}
             <Section>
-                <SectionTitle>📈 Histórico de Umidade</SectionTitle>
+                <TitleContainer>
+                    <Octicons name="graph" size={23} />
+                    <SectionTitle>Histórico de Umidade</SectionTitle>
+                </TitleContainer>
                 {historico.map((item, index) => (
                     <Row key={index}>
                         <Label>Registro {index + 1}:</Label>
@@ -91,10 +103,12 @@ export default function OverView() {
             {/* 🔘 Ações */}
             <ButtonRow>
                 <Button onPress={() => {}}>
-                    <ButtonText>🔄 Atualizar</ButtonText>
+                    <MaterialIcons name="update" size={20} color={"white"} />
+                    <ButtonText>Atualizar</ButtonText>
                 </Button>
                 <Button onPress={() => {}}>
-                    <ButtonText>🚿 Acionar Bomba</ButtonText>
+                    <MaterialIcons name="shower" size={20} color={"white"} />
+                    <ButtonText>Acionar Bomba</ButtonText>
                 </Button>
             </ButtonRow>
         </Container>
