@@ -78,7 +78,7 @@ export default function Dashboard() {
                         </Tab>
 
                         <Tab active={activeTab === 'problems'} onPress={() => setActiveTab('problems')}>
-                            <TabText active={activeTab === 'problems'}>Problemas</TabText>
+                            <TabText active={activeTab === 'problems'}>Cuidados</TabText>
                         </Tab>
                     </TabList>
                     

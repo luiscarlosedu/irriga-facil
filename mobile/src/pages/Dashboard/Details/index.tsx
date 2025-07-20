@@ -1,5 +1,5 @@
-import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Card, CardContent, CardTitle, CardValue, Container } from "./styles";
+import { Feather, FontAwesome5, FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Card, CardContent, CardTitle, CardTotal, CardValue, Container } from "./styles";
 
 interface DetailProps {
     temperature: string;
@@ -19,7 +19,7 @@ export default function Detail({ temperature }: DetailProps) {
             <Card>
                 <FontAwesome5 name="temperature-low" size={24} color="#4CAF50" />
                 <CardContent>
-                    <CardTitle>Temperature</CardTitle>
+                    <CardTitle>Temperatura</CardTitle>
                     <CardValue>{temperature}</CardValue>
                 </CardContent>
             </Card>
@@ -33,12 +33,36 @@ export default function Detail({ temperature }: DetailProps) {
             </Card>
 
             <Card>
-                <FontAwesome5 name="snowflake" size={24} color="#4CAF50" />
+                <FontAwesome6 name="plant-wilt" size={24} color="#4CAF50" />
                 <CardContent>
-                    <CardTitle>Hardiness</CardTitle>
-                    <CardValue>10-12 (USDA)</CardValue>
+                    <CardTitle>Umidade da Planta</CardTitle>
+                    <CardValue>15%</CardValue>
                 </CardContent>
             </Card>
+
+            <Card>
+                <MaterialCommunityIcons name="water" size={24} color="#4CAF50" />
+                <CardContent>
+                <CardTitle>Umidade Ideal</CardTitle>
+                <CardValue>40% a 70%</CardValue>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <MaterialCommunityIcons name="calendar-week" size={24} color="#4CAF50" />
+                <CardContent>
+                    <CardTitle>Frequência</CardTitle>
+                    <CardValue>1 vez por semana</CardValue>
+                </CardContent>
+            </Card>
+
+            <CardTotal>
+                <Feather name="info" size={24} color="#4CAF50" />
+                <CardContent>
+                    <CardTitle>Observação</CardTitle>
+                    <CardValue>Evite encharcar o solo.</CardValue>
+                </CardContent>
+            </CardTotal>
         </Container>
     );
 }

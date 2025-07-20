@@ -17,6 +17,17 @@ export const Card = styled.View`
     gap: 8px;
 `;
 
+export const CardTotal = styled.View`
+    background-color: #f0f0f0;
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+`;
+
 export const CardContent = styled.View`
     display: flex;
 `;
