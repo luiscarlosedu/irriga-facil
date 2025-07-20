@@ -11,6 +11,7 @@ export default function Home() {
 
     return (
         <Container>
+            <Text style={{fontSize: 40}}>Home Page</Text>
             <Button onPress={() => navigation.navigate("Dashboard")} title="Entrar em Dashboard"/>
         </Container>
     );

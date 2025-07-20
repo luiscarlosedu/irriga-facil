@@ -23,6 +23,20 @@ export const ImagePlant = styled.Image`
     /* border-bottom-right-radius: 16px; */
 `;
 
+interface ReturnButtonProps {
+    top: number;
+};
+
+export const ReturnButton = styled.TouchableOpacity<ReturnButtonProps>`
+    position: absolute;
+    top: ${({ top }) => `${top}px`};
+    left: 20px;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 6px;
+`;
+
 export const InfoView = styled.View`
     margin-top: -20px;
     background-color: white;
