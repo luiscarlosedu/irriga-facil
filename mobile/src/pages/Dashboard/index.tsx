@@ -90,10 +90,6 @@ export default function Dashboard() {
                     {activeTab === 'details' && <Detail temperature={temperature} />}
                     {activeTab === 'about' && <About />}
                     {activeTab === 'problems' && <Problems />}
-
-                    {/* <SaveButton>
-                        <SaveButtonText>Save to My Plants</SaveButtonText>
-                    </SaveButton> */}
                 </InfoView>
             </ContentScrollView>
         </Container>

@@ -12,15 +12,13 @@ export const ContentScrollView = styled.ScrollView`
 
 export const ViewImage = styled.View`
     width: 100%;
-    height: 300px;
+    height: 330px;
     display: flex;
 `;
 
 export const ImagePlant = styled.Image`
     width: 100%;
     height: 100%;
-    /* border-bottom-left-radius: 16px; */
-    /* border-bottom-right-radius: 16px; */
 `;
 
 interface ReturnButtonProps {
