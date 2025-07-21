@@ -7,7 +7,7 @@ const calcularUmidade = (valor: number): number => {
 };
 
 export default function OverView() {
-    const leituraSensor = 870;
+    const leituraSensor = 400;
     const umidade = calcularUmidade(leituraSensor);
 
     const bombaLigada = false;
