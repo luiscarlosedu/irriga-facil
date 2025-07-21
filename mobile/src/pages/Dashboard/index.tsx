@@ -8,27 +8,24 @@ import {
     Title,
     TabList,
     Tab,
-    CardsContainer,
-    Card,
-    CardTitle,
-    CardValue,
-    SaveButton,
-    SaveButtonText,
-    CardContent,
     TabText,
+    ReturnButton,
 } from './styles';
 import axios from 'axios';
-import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'react-native';
 import OverView from './OverView';
 import Detail from './Details';
 import About from './About';
 import Problems from './Problems';
 import Logs from './Logs';
+import { useNavigation } from '@react-navigation/native';
 
 type TabOption = 'overview' | 'logs' | 'details' | 'about' | 'problems';
+const topValue = StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 40;
 
 export default function Dashboard() {
+    const navigation = useNavigation();
     const [activeTab, setActiveTab] = useState<TabOption>('overview');
     const [temperature, setTemperature] = useState("");
 
@@ -55,6 +52,12 @@ export default function Dashboard() {
             <ContentScrollView showsVerticalScrollIndicator={false}>
                 <ViewImage>
                     <ImagePlant source={{ uri: 'https://images.tcdn.com.br/img/img_prod/665728/suporte_anel_para_trelica_gancho_vaso_autoirrigavel_15cm_1325_4_b527aeffc8cafdf458dd6b9b25e201a8.jpeg' }} />
+                    <ReturnButton
+                        onPress={() => navigation.goBack()}
+                        top={topValue}    
+                    >
+                        <Ionicons name="arrow-back" size={22} color="#333" />
+                    </ReturnButton>
                 </ViewImage>
 
                 <InfoView>
@@ -87,10 +90,6 @@ export default function Dashboard() {
                     {activeTab === 'details' && <Detail temperature={temperature} />}
                     {activeTab === 'about' && <About />}
                     {activeTab === 'problems' && <Problems />}
-
-                    {/* <SaveButton>
-                        <SaveButtonText>Save to My Plants</SaveButtonText>
-                    </SaveButton> */}
                 </InfoView>
             </ContentScrollView>
         </Container>

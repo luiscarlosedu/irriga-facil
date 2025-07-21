@@ -12,15 +12,27 @@ export const ContentScrollView = styled.ScrollView`
 
 export const ViewImage = styled.View`
     width: 100%;
-    height: 300px;
+    height: 330px;
     display: flex;
 `;
 
 export const ImagePlant = styled.Image`
     width: 100%;
     height: 100%;
-    /* border-bottom-left-radius: 16px; */
-    /* border-bottom-right-radius: 16px; */
+`;
+
+interface ReturnButtonProps {
+    top: number;
+};
+
+export const ReturnButton = styled.TouchableOpacity<ReturnButtonProps>`
+    position: absolute;
+    top: ${({ top }) => `${top}px`};
+    left: 20px;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 6px;
 `;
 
 export const InfoView = styled.View`
