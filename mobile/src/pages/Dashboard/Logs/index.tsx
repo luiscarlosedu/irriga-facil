@@ -1,5 +1,5 @@
-import React from "react";
-import { FlatList, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator } from "react-native";
 import {
     Container,
     Section,
@@ -10,33 +10,85 @@ import {
     LogDetail,
     LogLabel,
     LogValue,
+    SectionHeader,
+    SectionHeaderBtn,
+    SectionHeaderText,
 } from "./styles";
+import { api } from "../../../services/api";
+import { Ionicons } from "@expo/vector-icons";
 
-const registros = [
-    { id: "1", data: "16/07/2025", hora: "14:32", umidade: 38 },
-    { id: "2", data: "15/07/2025", hora: "11:45", umidade: 42 },
-    { id: "3", data: "14/07/2025", hora: "16:10", umidade: 47 },
-    { id: "4", data: "13/07/2025", hora: "10:28", umidade: 51 },
-    { id: "5", data: "12/07/2025", hora: "13:59", umidade: 49 },
-    { id: "6", data: "12/07/2025", hora: "13:59", umidade: 49 },
-];
+interface Log {
+    id: number;
+    data_hora: string;
+    umidade: number;
+}
 
 export default function Logs() {
+    const [registros, setRegistros] = useState<Log[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        loadLogs();
+    }, []);
+
+    async function loadLogs() {
+        try {
+            const response = await api.get("/logs");
+            setRegistros(response.data);
+        } catch (err) {
+            console.log("[ERROR]", err);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    function convertToPercentage(valorSensor: number): number {
+        return Math.round(((1023 - valorSensor) / 1023) * 100);
+    }
+
+    function formatDateTime(isoDate: string) {
+        const date = new Date(isoDate);
+        const dia = String(date.getDate()).padStart(2, "0");
+        const mes = String(date.getMonth() + 1).padStart(2, "0");
+        const ano = date.getFullYear();
+        const horas = String(date.getHours()).padStart(2, "0");
+        const minutos = String(date.getMinutes()).padStart(2, "0");
+
+        return `${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+    }
+
     return (
         <Container>
             <Section>
-                <SectionTitle>🚿 Registros de Irrigação</SectionTitle>
-                {registros.map((item) => (
-                    <LogCard key={item.id}>
-                        <LogInfo>
-                            <LogDate>{item.data} às {item.hora}</LogDate>
-                            <LogDetail>
-                                <LogLabel>Umidade:</LogLabel>
-                                <LogValue>{item.umidade}%</LogValue>
-                            </LogDetail>
-                        </LogInfo>
-                    </LogCard>
-                ))}
+                <SectionHeader style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                    <SectionTitle>🚿 Registros de Irrigação</SectionTitle>
+                    <SectionHeaderBtn
+                        onPress={() => {
+                            setLoading(true);
+                            loadLogs();
+                        }}
+                    >
+                        <SectionHeaderText>
+                            <Ionicons name="reload" size={23} color="black" />
+                        </SectionHeaderText>
+                    </SectionHeaderBtn>
+                </SectionHeader>
+
+                {loading ? (
+                    <ActivityIndicator size="large" color="#4CAF50" />
+                ) : (
+                    registros.map((item) => (
+                        <LogCard key={item.id}>
+                            <LogInfo>
+                                <LogDate>{formatDateTime(item.data_hora)}</LogDate>
+                                <LogDetail>
+                                    <LogLabel>Umidade:</LogLabel>
+                                    <LogValue>{convertToPercentage(item.umidade)}%</LogValue>
+                                </LogDetail>
+                            </LogInfo>
+                        </LogCard>
+                    ))
+                )}
             </Section>
         </Container>
     );

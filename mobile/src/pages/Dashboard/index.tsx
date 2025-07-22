@@ -44,7 +44,7 @@ export default function Dashboard() {
     };
 
     useEffect(() => {
-        loadTemperature("Tauá-Ceará");
+        // loadTemperature("Tauá-Ceará");
     }, []);
 
     return (

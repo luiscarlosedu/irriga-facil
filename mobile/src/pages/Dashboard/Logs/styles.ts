@@ -6,10 +6,22 @@ export const Section = styled.ScrollView`
     margin-bottom: 20px;
 `;
 
+export const SectionHeader = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
 export const SectionTitle = styled.Text`
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+`;
+
+export const SectionHeaderBtn = styled.TouchableOpacity`
+    padding: 2px 6px;
+`;
+
+export const SectionHeaderText = styled.Text`
 `;
 
 export const LogCard = styled.View`

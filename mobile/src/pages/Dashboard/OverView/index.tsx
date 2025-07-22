@@ -1,17 +1,19 @@
 import { Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons, Octicons } from "@expo/vector-icons";
 import { ButtonRow, Container, TitleContainer, Value } from "./styles";
 import { Button, ButtonText, ImagePlant, Label, MoistureCard, MoistureIcon, MoistureInfo, MoistureStatus, MoistureValue, Row, Section, SectionTitle } from "./styles";
+import { useEffect, useState } from "react";
+import { api } from "../../../services/api";
 
 const calcularUmidade = (valor: number): number => {
     return Math.max(0, Math.min(100, 100 - Math.round((valor / 1023) * 100)));
 };
 
 export default function OverView() {
-    const leituraSensor = 400;
+    const [leituraSensor, setLeituraSensor] = useState<number>(0);
     const umidade = calcularUmidade(leituraSensor);
 
     const bombaLigada = false;
-    const ultimaIrrigacao = "16/07/2025 às 14:32";
+    const [ultimaIrrigacao, setUltimaIrrigacao] = useState("Erro ao carregar dados!");
 
     const historicoBruto = [920, 780, 650, 1023, 850];
     const historico = historicoBruto.map(calcularUmidade);
@@ -23,6 +25,41 @@ export default function OverView() {
     };
 
     const status = getStatusUmidade();
+
+    useEffect(() => {
+        loadLastLog();
+        loadMoisture();
+    }, []);
+
+    async function loadLastLog() {
+        try {
+            const response = await api.get("/logs/last");
+            setUltimaIrrigacao(formatDateTime(response.data.data_hora));
+        } catch (err) {
+            console.log("[ERRO]");
+        };
+    };
+
+    async function loadMoisture() {
+        try {
+            const response = await api.get("/moisture");
+            setLeituraSensor(response.data.umidade);
+            console.log(response.data.umidade);
+        } catch (err) {
+            console.log("[ERRO]");
+        };
+    }
+
+    function formatDateTime(isoDate: string) {
+        const date = new Date(isoDate);
+        const dia = String(date.getDate()).padStart(2, "0");
+        const mes = String(date.getMonth() + 1).padStart(2, "0");
+        const ano = date.getFullYear();
+        const horas = String(date.getHours()).padStart(2, "0");
+        const minutos = String(date.getMinutes()).padStart(2, "0");
+
+        return `${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+    }
 
     return (
         <Container>
@@ -44,8 +81,8 @@ export default function OverView() {
                     <Ionicons name="water" size={23} color={"#48C5F3"} />
                     <SectionTitle>Umidade do Solo</SectionTitle>
                 </TitleContainer>
-                <MoistureCard status={status}>
 
+                <MoistureCard status={status}>
                     <MoistureInfo>
                         <MoistureValue>{umidade}%</MoistureValue>
                         <MoistureStatus status={status}>{status}</MoistureStatus>
