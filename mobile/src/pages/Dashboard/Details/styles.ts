@@ -6,6 +6,8 @@ export const Container = styled.View`
     gap: 10px;
 `;
 
+export const ContainerLoading = styled.View``;
+
 export const Card = styled.View`
     background-color: #f0f0f0;
     width: 48%;

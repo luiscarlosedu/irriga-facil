@@ -27,31 +27,32 @@ const topValue = StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 40;
 export default function Dashboard() {
     const navigation = useNavigation();
     const [activeTab, setActiveTab] = useState<TabOption>('overview');
-    const [temperature, setTemperature] = useState("");
+    const temperature = "30";
+    // const [temperature, setTemperature] = useState("");
 
-    async function loadTemperature(city: string) {
-        try {
-            const key = '909aaf292fb54c1a823164741251407';
-            const url = `https://api.weatherapi.com/v1/current.json?key=${key}&q=${city}&aqi=no`;
+    // async function loadTemperature(city: string) {
+    //     try {
+    //         const key = '909aaf292fb54c1a823164741251407';
+    //         const url = `https://api.weatherapi.com/v1/current.json?key=${key}&q=${city}&aqi=no`;
  
-            const response = await axios.get(url);
-            const tempC = response.data.current.temp_c;
-            setTemperature(`${tempC}°C`);
-        } catch (error) {
-            console.error("Erro ao buscar temperatura:", error);
-            setTemperature("Erro");
-        }
-    };
+    //         const response = await axios.get(url);
+    //         const tempC = response.data.current.temp_c;
+    //         setTemperature(`${tempC}°C`);
+    //     } catch (error) {
+    //         console.error("Erro ao buscar temperatura:", error);
+    //         setTemperature("Erro");
+    //     }
+    // };
 
-    useEffect(() => {
-        loadTemperature("Tauá-Ceará");
-    }, []);
+    // useEffect(() => {
+    //     // loadTemperature("Tauá-Ceará");
+    // }, []);
 
     return (
         <Container>
             <ContentScrollView showsVerticalScrollIndicator={false}>
                 <ViewImage>
-                    <ImagePlant source={{ uri: 'https://images.tcdn.com.br/img/img_prod/665728/suporte_anel_para_trelica_gancho_vaso_autoirrigavel_15cm_1325_4_b527aeffc8cafdf458dd6b9b25e201a8.jpeg' }} />
+                    <ImagePlant source={require("../../assets/monstera.jpeg")} />
                     <ReturnButton
                         onPress={() => navigation.goBack()}
                         top={topValue}    
