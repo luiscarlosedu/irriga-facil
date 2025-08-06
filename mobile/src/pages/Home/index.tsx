@@ -56,7 +56,7 @@ export default function Home() {
                         <FeatureIcon>
                         <MaterialCommunityIcons name="water-pump" size={24} color="#4CAF50" />
                         </FeatureIcon>
-                        <FeatureText>Acione a bomba automaticamente ou manualmente</FeatureText>
+                        <FeatureText>Acione a bomba automaticamente de forma remota!</FeatureText>
                     </FeatureBox>
 
                     <FeatureBox>

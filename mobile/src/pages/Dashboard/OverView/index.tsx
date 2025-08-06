@@ -120,7 +120,7 @@ export default function OverView() {
                                 size={32}
                                 color={
                                     status === "Alta"
-                                    ? "#673AB7" // roxo úmido
+                                    ? "#673AB7" 
                                     : status === "Moderada"
                                     ? "#4CAF50"
                                     : "#FF5722"
@@ -169,10 +169,10 @@ export default function OverView() {
                         <MaterialIcons name="update" size={20} color={"white"} />
                         <ButtonText>Atualizar</ButtonText>
                     </Button>
-                    <Button onPress={() => {}}>
+                    {/* <Button onPress={() => {}}>
                         <MaterialIcons name="shower" size={20} color={"white"} />
                         <ButtonText>Acionar Bomba</ButtonText>
-                    </Button>
+                    </Button> */}
                 </ButtonRow>
             </Container>
         )
